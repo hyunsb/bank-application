@@ -2,6 +2,7 @@ package bankApplication.controller;
 
 import bankApplication.Service.UserService;
 import bankApplication.dto.UserJoinRequest;
+import bankApplication.dto.UserLoginRequest;
 import bankApplication.dto.UserResponse;
 import bankApplication.model.User;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +41,16 @@ public class UserController {
 
         return ResponseEntity.ok(response);
 //        return "redirect:/user/joinForm";
+    }
+
+    @ResponseBody
+    @PostMapping("/user/login")
+    public ResponseEntity<?> login(@ModelAttribute UserLoginRequest request) {
+        log.info("login Request: " + request.toString());
+
+        User user = userService.login(request);
+        UserResponse response = UserResponse.from(user);
+
+        return ResponseEntity.ok(response);
     }
 }
