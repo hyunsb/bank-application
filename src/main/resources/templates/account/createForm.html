@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- --------------------- config --------------------- -->
+  <th:block th:replace="/fragments/config :: configFragment"></th:block>
+</head>
+<body>
+<!-- --------------------- header --------------------- -->
+<div th:replace="/fragments/header :: headerFragment"></div>
+
+
+<div class="container mt-3">
+  <h2>계좌 생성</h2>
+
+  <form method="post" action="/account/create">
+
+    <div class="mb-3 mt-3">
+      <label for="number">Account Number:</label>
+      <input type="text" class="form-control" id="number" placeholder="Enter AccountNumber" name="number" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="password">Account Password:</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">입력완료</button>
+  </form>
+</div>
+
+
+<!-- --------------------- footer --------------------- -->
+<div th:replace="/fragments/footer :: footerFragment"></div>
+</body>
+</html>
