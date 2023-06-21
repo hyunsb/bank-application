@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
+
+    private final HttpSession session;
 
     @GetMapping("/user/loginForm")
     public String login() {
@@ -48,9 +53,16 @@ public class UserController {
     public ResponseEntity<?> login(@ModelAttribute UserLoginRequest request) {
         log.info("login Request: " + request.toString());
 
-        User user = userService.login(request);
-        UserResponse response = UserResponse.from(user);
+        User principal = userService.login(request);
+        session.setAttribute("principal", principal);
 
+        UserResponse response = UserResponse.from(principal);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/user/list")
+    public ResponseEntity<?> userList() {
+        List<User> users = userService.allUsers();
+        return ResponseEntity.ok(users);
     }
 }

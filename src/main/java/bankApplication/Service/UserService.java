@@ -7,6 +7,7 @@ import bankApplication.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -49,5 +50,9 @@ public class UserService {
             throw new IllegalArgumentException("[회원가입 실패]: email이 존재하지 않습니다.");
         if (Objects.isNull(request.getPassword()))
             throw new IllegalArgumentException("[회원가입 실패]: password가 존재하지 않습니다.");
+    }
+
+    public List<User> allUsers() {
+        return userRepository.findAll();
     }
 }
