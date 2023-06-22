@@ -21,6 +21,7 @@ public class AccountService {
     public Account createAccount(AccountCreateRequest accountCreateRequest, User user) {
         validateAccountRequest(accountCreateRequest);
         Account account = AccountCreateRequest.toEntity(accountCreateRequest, user);
+        account.setBalance(1000L);
 
         return accountRepository.save(account);
     }

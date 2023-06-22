@@ -26,7 +26,6 @@ public class Account {
     @Column(nullable = false, length = 10)
     private String password;
 
-    @Column(columnDefinition = "Integer default 1000")
     private Long balance;
 
     @ManyToOne
